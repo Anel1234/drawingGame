@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Drawn Together</title>
+    <link href="~/Scripts/canvasStyle.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/canvasScript.js"></script>
+</head>
+<body>
+    <div class="icon-bar">
+        <a class="active" href="#"><i class="fa fa-home"></i></a>
+        <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-paint-brush" ></i></a>
+        <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-circle"></i></a>
+        <a href="#" onmousedown="inter = setInterval(undo, 100);" onmouseup="clearInterval(inter);" onmouseout="clearInterval(inter);"><i class="fa fa-globe"></i></a>
+        <a href="#"><i class="fa fa-trash"></i></a>
+    </div>
+    <div id="canvasDiv">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div id="colorMenu">
+        <a class="colorItem" style="background-color:white"></a>
+        <a class="colorItem" style="background-color:grey"></a>
+        <a class="colorItem" id="selColor" style="background-color:black"></a>
+        <a class="colorItem" style="background-color:blue"></a>
+        <a class="colorItem" style="background-color:mediumpurple"></a>
+        <a class="colorItem" style="background-color:pink"></a>
+        <a class="colorItem" style="background-color:red"></a>
+        <a class="colorItem" style="background-color:orange"></a>
+        <a class="colorItem" style="background-color:yellow"></a>
+        <a class="colorItem" style="background-color:lawngreen"></a>
+        <a class="colorItem" style="background-color:saddlebrown"></a>
+        <a>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+        </a>
+    </div>
+    @*<div id="menuTab">
+            <button class="tablinks">
+                <i class=""
+            </button>
+            <button class="tablinks">Account</button>
+            <button class="tablinks">Games</button>
+        </div>*@
+</body>
+</html>

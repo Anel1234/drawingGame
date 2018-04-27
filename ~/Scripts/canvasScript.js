@@ -1,0 +1,144 @@
+﻿var mousePressed = false;
+var lastX, lastY;
+var ctx;
+var canvasHeight;
+var canvasWidth;
+var selectedColor;
+var lines = [];
+//var inter;
+
+$(document).ready(function () {
+
+    $(".colorItem").click(function (ele) {
+     
+        $("#selColor").removeAttr("id");
+        $(ele.target).attr("id", "selColor");
+        selectedColor = $("#selColor").css("background-color");
+        $("#selectedColor").css("color", selectedColor);
+    });
+
+    //$("canvas").width(1000).height(1500);
+    //var canvas = document.getElementById("canvas");
+
+    ////canvasHeight = "947";
+    ////canvasWidth = "1988";
+
+    ////$("#canvas").attr("width", canvasWidth);
+    ////$("#canvas").attr("height", canvasHeight);
+
+    ctx = document.getElementById('canvas').getContext("2d");
+
+    initialize();
+
+    function initialize() {
+         //Register an event listener to call the resizeCanvas() function 
+         //each time the window is resized.
+        window.addEventListener('resize', resizeCanvas, false);
+         //Draw canvas border for the first time.
+        resizeCanvas();
+    }
+
+    function resizeCanvas() {
+        ctx.canvas.width = $("#canvasDiv").width();
+        ctx.canvas.height = $("#canvasDiv").height();
+        redrawCanvas();
+    }
+
+    //ctx.canvas.width = $("#canvasDiv").width() - 300;//window.innerWidth;
+    //ctx.canvas.height = $("#canvasDiv").height() - 100;//window.innerHeight;
+    //ctx.height = 2000;
+    //ctx.width = 1000;
+    //ctx.translate(0.5, 0.5);
+
+    $("#canvas").mousedown(function (e) {
+        mousePressed = true;
+        Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
+    });
+
+    $("#canvas").mousemove(function (e) {
+        if (mousePressed) {
+            Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
+        }
+    });
+
+    $("#canvas").mouseup(function (e) {
+        mousePressed = false;
+    });
+
+    $("#canvas").mouseleave(function (e) {
+        mousePressed = false;
+    });
+});
+
+function Draw(x, y, isDown) {
+    if (isDown) {
+        var width = parseInt($('#myRange').val());
+        ctx.beginPath();
+        ctx.strokeStyle = $('#selColor').css("background-color");
+        //alert(parseInt($('#myRange').val()));
+        ctx.lineWidth = width;/*$('#selWidth').val();*/
+        ctx.lineJoin = "round";
+        ctx.moveTo(lastX, lastY);
+        ctx.lineTo(x, y);
+        ctx.closePath();       
+        ctx.stroke();
+
+        //lines.push(ctx);
+        var line = { strokeStyle: $('#selColor').css("background-color"), lineWidth: width, lineJoin: "round", lastX: lastX, lastY: lastY, x: x, y: y }
+        lines.push(line);
+
+        
+    }
+    lastX = x; lastY = y;
+};
+
+var colorMenuOpen = false;
+
+function changeColor(ele) {
+
+    if (colorMenuOpen) {
+        //$("#colorMenu").width(0);
+        $("#colorMenu").css({ left: 0 });
+        $(".active").removeClass("active");
+        //$(".slider").hide();
+        colorMenuOpen = false;
+    }
+
+    else {
+        //$("#colorMenu").width(80);
+        $("#colorMenu").css({ left: 80 });
+        $(".active").removeClass("active");
+        $(ele).addClass("active");
+        //$(".slider").show();
+        colorMenuOpen = true;
+    }
+  
+};
+
+function undo() {
+    lines.pop();
+    redrawCanvas();
+};
+
+
+function redrawCanvas() {
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    var i;
+    var len = lines.length;
+    for (i = 0; i < len; i++) {
+
+        var x = lines[i];
+        //alert(x);
+
+        ctx.beginPath();
+        ctx.strokeStyle = x.strokeStyle;
+        ctx.lineWidth = x.lineWidth;
+        ctx.lineJoin = x.lineJoin;
+        ctx.moveTo(x.lastX, x.lastY);
+        ctx.lineTo(x.x,x.y);
+        ctx.closePath();
+        ctx.stroke();
+    }
+};
