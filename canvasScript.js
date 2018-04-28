@@ -11,6 +11,17 @@ var undoArray = [];
 
 $(document).ready(function () {
 
+    FB.init({
+        appId  : '887894374746822',
+        status : true, // check login status
+        cookie : true, // enable cookies to allow the server to access the session
+        xfbml  : true  // parse XFBML
+      });
+
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+
     $(".colorItem").click(function (ele) {
      
         $("#selColor").removeAttr("id");
@@ -141,8 +152,13 @@ function undolastline() {
 }
 
 function facebookLogin(){
-    FB.init();
-    FB.login();  
+    FB.login(function(response){
+        if (response.status === 'connected') {
+            alert("Logged into Facebook!")
+          } else {
+            alert("Not Logged into Facebook!")
+          }
+    });  
 }
 
 
