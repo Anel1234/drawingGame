@@ -22,7 +22,8 @@
         <a href="#" onclick="undolastline()"><i class="fa fa-undo"></i></a>
         <a href="#" onmousedown="inter = setInterval(undo, 100);" onmouseup="clearInterval(inter);" onmouseout="clearInterval(inter);"><i class="fa fa-globe"></i></a>
         <a href="#" onclick="facebookLogin()"><i id="selectedColor" class="fa fa-facebook-square" ></i></a>
-        <a href="#" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"><i id="selectedColor" class="fa fa-google" ></i></a>       
+        <a href="#" onclick="facebookSend()"><i id="selectedColor" class="fa fa-share-square" ></i></a>
+        <!-- <a href="#" data-onsuccess="onSignIn" data-theme="dark"><i id="selectedColor" class="fa fa-google" ></i></a>        -->
     </div>
     <div id="canvasDiv">
         <canvas id="canvas"></canvas>
@@ -44,7 +45,7 @@
                 <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
             </div>          
         </a>
-        <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>   
+        <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>    -->
     </div>
 </body>
 </html>

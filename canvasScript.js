@@ -151,28 +151,19 @@ function undolastline() {
     redrawCanvas();
 }
 
-function facebookLogin(){
-    FB.login(function(response){
-        if (response.status === 'connected') {
-            alert("Logged into Facebook!")
-          } else {
-            alert("Not Logged into Facebook!")
-          }
-    });  
-}
 
 
 function redrawCanvas() {
-
+    
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    
     var i;
     var len = lines.length;
     for (i = 0; i < len; i++) {
-
+        
         var x = lines[i];
         //alert(x);
-
+        
         ctx.beginPath();
         ctx.strokeStyle = x.strokeStyle;
         ctx.lineWidth = x.lineWidth;
@@ -193,8 +184,27 @@ function onSignIn(googleUser) {
     console.log('Family Name: ' + profile.getFamilyName());
     console.log("Image URL: " + profile.getImageUrl());
     console.log("Email: " + profile.getEmail());
-
+    
     // The ID token you need to pass to your backend:
     var id_token = googleUser.getAuthResponse().id_token;
     console.log("ID Token: " + id_token);
-  };
+};
+
+function facebookLogin(){
+    FB.login(function(response){
+        if (response.status === 'connected') {
+            alert("Logged into Facebook!")
+            }
+            else {
+            alert("Not Logged into Facebook!")
+            }
+    });  
+};
+
+function facebookSend(){
+    FB.ui({
+        method: 'send',
+        name: 'This is a test - DO NOT BE ALARMED',
+        link: 'https://anel1234.github.io/drawingGame/drawnTogether'
+    })
+};
