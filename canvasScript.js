@@ -5,6 +5,8 @@ var canvasHeight;
 var canvasWidth;
 var selectedColor;
 var lines = [];
+var linelength = 0;
+var undoArray = [];
 //var inter;
 
 $(document).ready(function () {
@@ -62,11 +64,19 @@ $(document).ready(function () {
     });
 
     $("#canvas").mouseup(function (e) {
-        mousePressed = false;
+        if (mousePressed) {
+            mousePressed = false;
+            undoArray.push(linelength)
+            linelength = 0;
+        }
     });
 
     $("#canvas").mouseleave(function (e) {
-        mousePressed = false;
+        if (mousePressed) {
+            mousePressed = false;
+            undoArray.push(linelength)
+            linelength = 0;
+        }
     });
 });
 
@@ -82,6 +92,7 @@ function Draw(x, y, isDown) {
         ctx.lineTo(x, y);
         ctx.closePath();       
         ctx.stroke();
+        linelength++;
 
         //lines.push(ctx);
         var line = { strokeStyle: $('#selColor').css("background-color"), lineWidth: width, lineJoin: "round", lastX: lastX, lastY: lastY, x: x, y: y }
@@ -119,6 +130,20 @@ function undo() {
     lines.pop();
     redrawCanvas();
 };
+
+function undolastline() {
+    var l = undoArray[undoArray.length - 1];
+    for (var x = 0; x < l; x++){
+        lines.pop();
+    }
+    undoArray.pop();
+    redrawCanvas();
+}
+
+function facebookLogin(){
+    FB.init();
+    FB.login();  
+}
 
 
 function redrawCanvas() {
