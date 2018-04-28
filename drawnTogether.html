@@ -22,7 +22,7 @@
         <a href="#" onclick="undolastline()"><i class="fa fa-undo"></i></a>
         <a href="#" onmousedown="inter = setInterval(undo, 100);" onmouseup="clearInterval(inter);" onmouseout="clearInterval(inter);"><i class="fa fa-globe"></i></a>
         <a href="#" onclick="facebookLogin()"><i id="selectedColor" class="fa fa-facebook-square" ></i></a>
-        <a href="#" data-onsuccess="onSignIn"><i id="selectedColor" class="fa fa-google" ></i></a>       
+        <a href="#" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"><i id="selectedColor" class="fa fa-google" ></i></a>       
     </div>
     <div id="canvasDiv">
         <canvas id="canvas"></canvas>
