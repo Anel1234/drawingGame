@@ -193,18 +193,23 @@ function onSignIn(googleUser) {
 function facebookLogin(){
     FB.login(function(response){
         if (response.status === 'connected') {
-            alert("Logged into Facebook!")
             }
             else {
-            alert("Not Logged into Facebook!")
             }
     });  
 };
 
 function facebookSend(){
+    // FB.ui({
+    //     method: 'send',
+    //     name: 'This is a test - DO NOT BE ALARMED',
+    //     link: 'https://anel1234.github.io/drawingGame/drawnTogether'
+    // })
     FB.ui({
-        method: 'send',
-        name: 'This is a test - DO NOT BE ALARMED',
-        link: 'https://anel1234.github.io/drawingGame/drawnTogether'
-    })
+        method: 'apprequests',
+        message: 'YOUR_MESSAGE_HERE'
+    },
+    function(response){
+        console.log(response);
+    });
 };
