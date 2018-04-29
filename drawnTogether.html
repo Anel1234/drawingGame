@@ -16,37 +16,39 @@
 
 </head>
 <body>
-    <div class="icon-bar">
-        <a class="active" href="#"><i class="fa fa-home"></i></a>
-        <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-paint-brush" ></i></a>
-        <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-circle"></i></a>
-        <a href="#" onclick="undolastline()"><i class="fa fa-undo"></i></a>
-        <a href="#" onmousedown="inter = setInterval(undo, 100);" onmouseup="clearInterval(inter);" onmouseout="clearInterval(inter);"><i class="fa fa-globe"></i></a>
-        <a href="#" onclick="facebookLogin()"><i id="selectedColor" class="fa fa-facebook-square" ></i></a>
-        <a href="#" onclick="facebookSend()"><i id="selectedColor" class="fa fa-share-square" ></i></a>
-        <!-- <a href="#" data-onsuccess="onSignIn" data-theme="dark"><i id="selectedColor" class="fa fa-google" ></i></a>        -->
-    </div>
-    <div id="canvasDiv">
-        <canvas id="canvas"></canvas>
-    </div>
-    <div id="colorMenu">
-        <a class="colorItem" style="background-color:white"></a>
-        <a class="colorItem" style="background-color:grey"></a>
-        <a class="colorItem" id="selColor" style="background-color:black"></a>
-        <a class="colorItem" style="background-color:blue"></a>
-        <a class="colorItem" style="background-color:mediumpurple"></a>
-        <a class="colorItem" style="background-color:pink"></a>
-        <a class="colorItem" style="background-color:red"></a>
-        <a class="colorItem" style="background-color:orange"></a>
-        <a class="colorItem" style="background-color:yellow"></a>
-        <a class="colorItem" style="background-color:lawngreen"></a>
-        <a class="colorItem" style="background-color:saddlebrown"></a>
-        <a>
-            <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-            </div>          
-        </a>
-        <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>    -->
+    <div id ="wrapper">
+        <div class="icon-bar">
+            <a class="active" href="#"><i class="fa fa-home"></i></a>
+            <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-paint-brush" ></i></a>
+            <a href="#" onclick="changeColor(this)"><i id="selectedColor" class="fa fa-circle"></i></a>
+            <a href="#" onclick="undolastline()"><i class="fa fa-undo"></i></a>
+            <a href="#" onmousedown="inter = setInterval(undo, 100);" onmouseup="clearInterval(inter);" onmouseout="clearInterval(inter);"><i class="fa fa-globe"></i></a>
+            <a href="#" onclick="facebookLogin()"><i id="selectedColor" class="fa fa-facebook-square" ></i></a>
+            <a href="#" onclick="facebookSend()"><i id="selectedColor" class="fa fa-share-square" ></i></a>
+            <!-- <a href="#" data-onsuccess="onSignIn" data-theme="dark"><i id="selectedColor" class="fa fa-google" ></i></a>        -->
+        </div>
+        <div id="canvasDiv">
+            <canvas id="canvas"></canvas>
+        </div>
+        <div id="colorMenu">
+            <a class="colorItem" style="background-color:white"></a>
+            <a class="colorItem" style="background-color:grey"></a>
+            <a class="colorItem" id="selColor" style="background-color:black"></a>
+            <a class="colorItem" style="background-color:blue"></a>
+            <a class="colorItem" style="background-color:mediumpurple"></a>
+            <a class="colorItem" style="background-color:pink"></a>
+            <a class="colorItem" style="background-color:red"></a>
+            <a class="colorItem" style="background-color:orange"></a>
+            <a class="colorItem" style="background-color:yellow"></a>
+            <a class="colorItem" style="background-color:lawngreen"></a>
+            <a class="colorItem" style="background-color:saddlebrown"></a>
+            <a>
+                <div class="slidecontainer">
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                </div>          
+            </a>
+            <!-- <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>    -->
+        </div>
     </div>
 </body>
 </html>
