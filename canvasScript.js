@@ -191,12 +191,19 @@ function onSignIn(googleUser) {
 };
 
 function facebookLogin(){
-    FB.login(function(response){
-        if (response.status === 'connected') {
-            }
-            else {
-            }
-    });  
+
+    FB.getLoginStatus(function(response){
+        if (response.status === 'connected'){           
+        }
+        else{
+            FB.login(function(response){
+                if (response.status === 'connected') {
+                    }
+                    else {
+                    }
+            });
+        }
+    })    
 };
 
 function facebookSend(){
