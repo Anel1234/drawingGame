@@ -18,9 +18,9 @@ $(document).ready(function () {
         xfbml  : true  // parse XFBML
       });
 
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
+    // FB.getLoginStatus(function(response) {
+    //     statusChangeCallback(response);
+    // });
 
     $(".colorItem").click(function (ele) {
      
