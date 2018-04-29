@@ -214,7 +214,7 @@ function facebookSend(){
     // })
     FB.ui({
         method: 'apprequests',
-        to: "",
+        // to: "",
         message: 'Testing the App'
     },
     function(response){
