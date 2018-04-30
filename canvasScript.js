@@ -207,15 +207,18 @@ function facebookLogin(){
 };
 
 function facebookSend(){
-    FB.ui({
-        method: 'send',
-        name: 'This is a test - DO NOT BE ALARMED',
-        link: 'https://anel1234.github.io/drawingGame/drawnTogether'
-    })
+    // FB.ui({
+    //     method: 'send',
+    //     name: 'This is a test - DO NOT BE ALARMED',
+    //     link: 'https://anel1234.github.io/drawingGame/drawnTogether'
+    // })
+    var dataUrl = canvas.toDataURL();
+
     FB.ui({
         method: 'apprequests',
         // to: "",
-        message: 'Testing the App'
+        message: 'Testing the App',
+        picture: dataUrl
     },
     function(response){
         console.log(response);
