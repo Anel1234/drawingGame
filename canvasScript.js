@@ -213,7 +213,7 @@ function facebookSend(){
         method: 'send',
         name: 'This is a test - DO NOT BE ALARMED',
         link: 'https://anel1234.github.io/drawingGame/drawnTogether',
-        picture: dataUrl
+        picture: 'bobross.png'
     })
 
     // FB.ui({
