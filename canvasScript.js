@@ -219,7 +219,7 @@ function facebookSend(){
         method: 'apprequests',
         // to: "",
         message: 'Testing the App',
-        // picture: dataUrl
+        picture: dataUrl
     },
     function(response){
         console.log(response);
