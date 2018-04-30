@@ -207,21 +207,22 @@ function facebookLogin(){
 };
 
 function facebookSend(){
-    // FB.ui({
-    //     method: 'send',
-    //     name: 'This is a test - DO NOT BE ALARMED',
-    //     link: 'https://anel1234.github.io/drawingGame/drawnTogether'
-    // })
     var dataUrl = canvas.toDataURL();
     alert(dataUrl);
-
     FB.ui({
-        method: 'apprequests',
-        // to: "",
-        message: 'Testing the App',
+        method: 'send',
+        name: 'This is a test - DO NOT BE ALARMED',
+        link: 'https://anel1234.github.io/drawingGame/drawnTogether',
         picture: dataUrl
-    },
-    function(response){
-        console.log(response);
-    });
+    })
+
+    // FB.ui({
+    //     method: 'apprequests',
+    //     // to: "",
+    //     message: 'Testing the App',
+    //     picture: dataUrl
+    // },
+    // function(response){
+    //     console.log(response);
+    // });
 };
