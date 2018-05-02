@@ -65,18 +65,18 @@ $(document).ready(function () {
     //ctx.width = 1000;
     //ctx.translate(0.5, 0.5);
 
-    $("#canvas").mousedown(function (e) {
+    $("#canvas").touchstart(function (e) {
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
     });
 
-    $("#canvas").mousemove(function (e) {
+    $("#canvas").touchmove(function (e) {
         if (mousePressed) {
             Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
         }
     });
 
-    $("#canvas").mouseup(function (e) {
+    $("#canvas").touchend(function (e) {
         if (mousePressed) {
             mousePressed = false;
             undoArray.push(linelength)
