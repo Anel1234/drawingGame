@@ -65,28 +65,26 @@ $(document).ready(function () {
     //ctx.width = 1000;
     //ctx.translate(0.5, 0.5);
 
-    // $('#canvas').on({ 'touchstart' : function(){ alert(hello)} });
+    //$(document).bind( "mouseup touchend", function(e){alert("hello")});
 
-    $("#canvas").on({'touchstart' : (function (e) {
-        alert(hello);
+    $("#canvas").bind( "mousedown touchend", function (e) {
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
-    })
-});
+    });
 
-    $("#canvas").on({'touchmove' : (function (e) {
+    $("#canvas").bind( "mousemove touchmove", (function (e) {
         if (mousePressed) {
             Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
         }
-    })});
+    }));
 
-    $("#canvas").on({'touchend' : (function (e) {
+    $("#canvas").bind( "mouseup touchend", (function (e) {
         if (mousePressed) {
             mousePressed = false;
             undoArray.push(linelength)
             linelength = 0;
         }
-    })});
+    }));
 
     $("#canvas").mouseleave(function (e) {
         if (mousePressed) {
