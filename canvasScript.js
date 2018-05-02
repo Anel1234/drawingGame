@@ -67,18 +67,31 @@ $(document).ready(function () {
 
     //$(document).bind( "mouseup touchend", function(e){alert("hello")});
 
-    $("#canvas").bind( "mousedown touchstart", function (e) {
+    $("#canvas").bind( "touchstart", function (e) {
+        //alert("hello");
+        mousePressed = true;
+        Draw(e.originalEvent.touches[0].pageX - $(this).offset().left, e.originalEvent.touches[0].pageY - $(this).offset().top, false);
+    });
+
+    $("#canvas").bind( "touchmove", (function (e) {
+        if (mousePressed) {
+            Draw(e.originalEvent.touches[0].pageX - $(this).offset().left, e.originalEvent.touches[0].pageY - $(this).offset().top, true);
+        }
+    }));
+
+    $("#canvas").bind( "mousedown", function (e) {
+        //alert("hello");
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
     });
 
-    $("#canvas").bind( "mousemove touchmove", (function (e) {
+    $("#canvas").bind( "mousemove", (function (e) {
         if (mousePressed) {
             Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
         }
     }));
 
-    $("#canvas").bind( "mouseup touchend", (function (e) {
+    $("#canvas").bind( "touchend mouseup", (function (e) {
         if (mousePressed) {
             mousePressed = false;
             undoArray.push(linelength)
