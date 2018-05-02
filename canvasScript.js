@@ -67,7 +67,7 @@ $(document).ready(function () {
 
     //$(document).bind( "mouseup touchend", function(e){alert("hello")});
 
-    $("#canvas").bind( "mousedown touchend", function (e) {
+    $("#canvas").bind( "mousedown touchstart", function (e) {
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
     });
