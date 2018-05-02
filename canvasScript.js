@@ -65,24 +65,28 @@ $(document).ready(function () {
     //ctx.width = 1000;
     //ctx.translate(0.5, 0.5);
 
-    $("#canvas").touchstart(function (e) {
+    // $('#canvas').on({ 'touchstart' : function(){ alert(hello)} });
+
+    $("#canvas").on({'touchstart' : (function (e) {
+        alert(hello);
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
-    });
+    })
+});
 
-    $("#canvas").touchmove(function (e) {
+    $("#canvas").on({'touchmove' : (function (e) {
         if (mousePressed) {
             Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, true);
         }
-    });
+    })});
 
-    $("#canvas").touchend(function (e) {
+    $("#canvas").on({'touchend' : (function (e) {
         if (mousePressed) {
             mousePressed = false;
             undoArray.push(linelength)
             linelength = 0;
         }
-    });
+    })});
 
     $("#canvas").mouseleave(function (e) {
         if (mousePressed) {
