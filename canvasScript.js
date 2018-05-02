@@ -11,6 +11,8 @@ var undoArray = [];
 
 $(document).ready(function () {
 
+    screen.orientation.lock('landscape');
+    
     FB.init({
         appId  : '887894374746822',
         status : true, // check login status
