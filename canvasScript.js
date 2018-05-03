@@ -9,19 +9,21 @@ var linelength = 0;
 var undoArray = [];
 var imgData;
 var inter;
-var drawingAreaX = 111;
-var drawingAreaY = 11;
-var	drawingAreaWidth = 267;
-var	drawingAreaHeight = 200;
+var drawingAreaX = 0;
+var drawingAreaY = 0;
+var	drawingAreaWidth;
+var	drawingAreaHeight;
 var	colorLayerData;
 var	outlineLayerData;
 var totalLoadResources = 3;
 var curLoadResNum = 0;
+var isFill = false;
 var curColor = {
-    r: 203,
-    g: 53,
-    b: 148
+    r: 23,
+    g: 98,
+    b: 122
 };
+
 
 $(document).ready(function () {
 
@@ -44,6 +46,11 @@ $(document).ready(function () {
         $(ele.target).attr("id", "selColor");
         selectedColor = $("#selColor").css("background-color");
         $("#selectedColor").css("color", selectedColor);
+        var rgb = selectedColor.replace(/[^\d,]/g, '').split(',');
+        curColor.r = Number(rgb[0]);
+        curColor.g = Number(rgb[1]);
+        curColor.b = Number(rgb[2]);
+        //alert(curColor.r, curColor.g, curColor.b);
     });
 
     //$("canvas").width(1000).height(1500);
@@ -72,13 +79,14 @@ $(document).ready(function () {
         ctx.canvas.height = $("#canvasDiv").height();
         canvasWidth = ctx.canvas.width;
         canvasHeight = ctx.canvas.height;
+        drawingAreaHeight = canvasHeight;
+        drawingAreaWidth = canvasWidth;
         
         redrawCanvas();
     }
 
     colorLayerData = ctx.getImageData(0,0,ctx.canvas.width,ctx.canvas.height);
-    // alert(imgData);
-
+    outlineLayerData = ctx.getImageData(0,0,ctx.canvas.width,ctx.canvas.height);
 
     //ctx.canvas.width = $("#canvasDiv").width() - 300;//window.innerWidth;
     //ctx.canvas.height = $("#canvasDiv").height() - 100;//window.innerHeight;
@@ -89,9 +97,15 @@ $(document).ready(function () {
     //$(document).bind( "mouseup touchend", function(e){alert("hello")});
 
     $("#canvas").bind( "touchstart", function (e) {
-        //alert("hello");      
+        //alert("hello"); 
+        if (isFill){
+            paintAt(e.originalEvent.touches[0].pa, e.originalEvent.touches[0].pageY);
+            isFill = false;
+        }
+        else{    
         mousePressed = true;
         Draw(e.originalEvent.touches[0].pageX - $(this).offset().left, e.originalEvent.touches[0].pageY - $(this).offset().top, false);
+        }
     });
 
     $("#canvas").bind( "touchmove", (function (e) {
@@ -102,9 +116,14 @@ $(document).ready(function () {
 
     $("#canvas").bind( "mousedown", function (e) {
         //alert("hello");
-        paintAt(e.pageX, e.pageY);
+        if (isFill) {
+            paintAt(e.pageX, e.pageY);
+            isFill = false;
+        }
+        else{
         mousePressed = true;
         Draw(e.pageX - $(this).offset().left, e.pageY - $(this).offset().top, false);
+        }
     });
 
     $("#canvas").bind( "mousemove", (function (e) {
@@ -150,7 +169,7 @@ function Draw(x, y, isDown) {
 
         
     }
-    ctx.putImageData(colorLayerData, 0, 0);
+    //ctx.putImageData(colorLayerData, 0, 0);
     lastX = x; lastY = y;
 };
 
@@ -176,6 +195,10 @@ function changeColor(ele) {
     }
   
 };
+
+function changeFill() {
+    isFill = true;
+}
 
 function undo() {
     lines.pop();
@@ -275,19 +298,19 @@ matchOutlineColor = function (r, g, b, a) {
 
 matchStartColor = function (pixelPos, startR, startG, startB) {
 
-    var r = 63//outlineLayerData.data[pixelPos],
-        g = 23,//outlineLayerData.data[pixelPos + 1],
-        b = 101,//outlineLayerData.data[pixelPos + 2],
-        a = 12//outlineLayerData.data[pixelPos + 3];
+    var r = outlineLayerData.data[pixelPos],
+        g = outlineLayerData.data[pixelPos + 1],
+        b = outlineLayerData.data[pixelPos + 2],
+        a = outlineLayerData.data[pixelPos + 3];
 
     // If current pixel of the outline image is black
     if (matchOutlineColor(r, g, b, a)) {
         return false;
     }
 
-    r = 13;//colorLayerData.data[pixelPos];
-    g = 103;//colorLayerData.data[pixelPos + 1];
-    b = 43;//colorLayerData.data[pixelPos + 2];
+    r = colorLayerData.data[pixelPos];
+    g = colorLayerData.data[pixelPos + 1];
+    b = colorLayerData.data[pixelPos + 2];
 
     // If the current pixel matches the clicked color
     if (r === startR && g === startG && b === startB) {
@@ -401,5 +424,5 @@ paintAt = function (startX, startY) {
 
     floodFill(startX, startY, r, g, b);
 
-    Draw();
+    ctx.putImageData(colorLayerData, 0, 0);
 }
