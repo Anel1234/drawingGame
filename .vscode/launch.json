@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/Anel/Desktop/Drawn%20Together/drawnTogether.html",
+            "url": "file:///C:/Users/Anel/Desktop/drawnTogether/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
