@@ -36,9 +36,10 @@ $(document).ready(function () {
         xfbml  : true  // parse XFBML
       });
 
-    // FB.getLoginStatus(function(response) {
-    //     statusChangeCallback(response);
-    // });
+    FB.getLoginStatus(function(response) {
+        statusChangeCallback(response);
+    });
+    
 
     $(".colorItem").click(function (ele) {
      
@@ -256,7 +257,11 @@ function onSignIn(googleUser) {
 function facebookLogin(){
 
     FB.getLoginStatus(function(response){
-        if (response.status === 'connected'){           
+        if (response.status === 'connected'){    
+            FB.getAuthResponse(function(response) {
+                var id = response.accessToken;
+                alert(id);
+            })       
         }
         else{
             FB.login(function(response){
@@ -404,6 +409,9 @@ floodFill = function (startX, startY, startR, startG, startB) {
 }
 
 paintAt = function (startX, startY) {
+
+    colorLayerData = ctx.getImageData(0,0,ctx.canvas.width,ctx.canvas.height);
+    outlineLayerData = ctx.getImageData(0,0,ctx.canvas.width,ctx.canvas.height);
 
     var pixelPos = (startY * canvasWidth + startX) * 4,
         r = colorLayerData.data[pixelPos],
