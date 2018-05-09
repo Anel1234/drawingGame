@@ -9,7 +9,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome against localhost",
-            "url": "file:///C:/Users/Anel/Desktop/drawnTogether/index.html",
+            "url": "file:///C:/Users/Anel/Desktop/drawnTogether/crud-angular/index.html",
             "webRoot": "${workspaceFolder}"
         }
     ]
